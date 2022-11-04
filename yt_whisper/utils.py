@@ -25,7 +25,9 @@ def format_timestamp(seconds: float, always_include_hours: bool = False, decimal
 
     hours_marker = f"{hours:02d}:" if always_include_hours or hours > 0 else ""
     return f"{hours_marker}{minutes:02d}:{seconds:02d}{decimal_marker}{milliseconds:03d}"
+# The function first calculates the index at which to split the line, based on the desired length. It then works backwards from that index, looking for a space character. If it finds one, it breaks the line at that point. If it doesn't find a space character, it decreases the index and tries again.
 
+# If the index reaches 1 without finding a space character, it means the line cannot be split and the function returns the original line.
 def break_line(line: str, length: int):
     break_index = min(len(line)//2, length) # split evenly or at maximum length
 
